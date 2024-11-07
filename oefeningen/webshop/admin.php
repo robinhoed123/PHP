@@ -45,66 +45,13 @@
             <div class="producten">
                 <ul class="button-lijst">
                     <li>
-                        <button type="button" onclick="location.href='beheerKlanten.php'">Beheer Klanten</button>
+                        <button onclick="location.href='beheerKlanten.php'">Beheer Klanten</button>
                     </li>
                     <li>
-                        <button class="add">product toe voegen</button>
+                        <button onclick="location.href='productAdd.php'">Product toevoegen</button>
                     </li>
                 </ul>
             </div>
-        <div class="add-product" style="display:none;">
-            <h2>add Product</h2>
-            <form id="bewerkProductFormulier" action="productAdd.php" method="post" enctype="multipart/form-data">
-                <p>
-                    <label for="productAfbeelding">Productafbeelding (PNG):</label>
-                    <input type="file" id="productAfbeelding" name="productAfbeelding" accept="image/png" required>
-                </p>
-                <p>
-                    <label for="productNaam">Productnaam:</label>
-                    <input type="text" id="productNaam" name="productNaam" required>
-                </p>
-                <p>
-                    <label for="productBeschrijving">Productbeschrijving:</label>
-                    <textarea id="productBeschrijving" name="productBeschrijving" required></textarea>
-                </p>
-                <p>
-                    <label for="productvissoort">vissoort:</label>
-                    <input type="text" id="productvissoort" name="productvissoort" required>
-                </p>
-                <p>
-                    <label for="productgewicht">productgewicht:</label>
-                    <input type="number" id="productgewicht" name="productgewicht" required>
-                </p>
-                <p>
-                    <label for="productPrijs">Productprijs (€):</label>
-                    <input type="number" id="productPrijs" name="productPrijs" step="0.01" required>
-                </p>
-                <p>
-                    <label for="productHoeveelheid">Beschikbare hoeveelheid:</label>
-                    <input type="number" id="productHoeveelheid" name="productHoeveelheid" min="1" max="69" required>
-                </p>
-                <div class="knop">
-                    <input type="submit" value="Opslaan">
-                    <input type="reset" value="Reset">
-                </div>
-            </form>
-
-
-            <script>
-  
-
-                document.querySelector('.add').addEventListener('click', function() {
-                       document.querySelector('.producten').style.display = 'none';
-               document.querySelector('.add-product').style.display = 'block';
-                  });
-      
-                document.getElementById('addProductForm').addEventListener('submit', function() {
-                    document.querySelector('.producten').style.display = 'block';
-                    document.querySelector('.add-product').style.display = 'none';
-
-                });
-
-            </script>
         </div>
         </div>
     </div>
