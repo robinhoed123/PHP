@@ -1,0 +1,40 @@
+nog afwerken en digen zo als extist en drop toe voegen :)
+
+USE webshop if extist
+CREATE TABLE Persoon (
+    klant_id INT PRIMARY KEY AUTO_INCREMENT,
+    voornaam VARCHAR(20),
+    achternaam VARCHAR(20),
+    address VARCHAR(100),
+    email VARCHAR(100),
+    admin BOOLEAN DEFAULT FALSE,
+    verwijderd BOOLEAN DEFAULT TRUE
+);
+CREATE TABLE Produckt (
+    produckt_id INT PRIMARY KEY AUTO_INCREMENT,
+    naam VARCHAR(100),
+    beschrijving TEXT,
+    lengte DECIMAL(5, 2),
+    gewicht DECIMAL(5, 2),
+    vissoort VARCHAR(50),
+    prijs DECIMAL(10, 2),
+    stock INT,
+
+);
+CREATE TABLE Besteling (
+    besteling_id INT PRIMARY KEY AUTO_INCREMENT,
+    klant_id INT,
+    datum DATE,
+    totaal_prijs DECIMAL(10, 2),
+    FOREIGN KEY (klant_id) REFERENCES Persoon(klant_id)
+);
+CREATE TABLE Produckten_Besteld (
+    klant_id INT,
+    produckt_id INT,
+    aantal_besteld INT,
+    prijs DECIMAL(10, 2),
+    betaald BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (klant_id, produckt_id),
+    FOREIGN KEY (klant_id) REFERENCES Persoon(klant_id),
+    FOREIGN KEY (produckt_id) REFERENCES Produckt(produckt_id)
+);

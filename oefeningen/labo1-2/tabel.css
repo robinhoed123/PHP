@@ -1,0 +1,23 @@
+table {
+    border-collapse: collapse;
+    border: 3px solid black;
+    width: 10%;
+    margin-left: 40%;
+}
+
+th, td {
+    border-bottom: 3px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: rgb(174, 174, 174);
+    color: white;
+}
+div.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+body{text-align: center;}

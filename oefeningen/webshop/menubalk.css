@@ -1,0 +1,48 @@
+.menu {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.menu-bar {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 10px;
+}
+
+.menu-bar li {
+  list-style: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 21px;
+  padding: 6px 16px;
+  margin: 0 8px;
+  color: white;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}
+
+.menu-bar li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transition: transform 0.2s;
+}
+
+.menu-bar li:hover {
+  transform: scale(1.5);
+}
+
+.menu-bar li a {
+  color: white;
+  text-decoration: none;
+}

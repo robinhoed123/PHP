@@ -1,0 +1,66 @@
+.wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    min-width: 1200px;
+    max-width: 1800px;
+    padding-right: 10px; 
+    padding-left: 10px;
+    font-family: sans-serif;
+  }
+form {
+    width: 300px;
+    margin: 30px auto 30px auto;
+    font-weight: bold;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+input[type="submit"], input[type="reset"] ,button{
+    background-color: #00aaff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0 0 5%;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    border-radius: 15px;
+    font-size: 20px;
+    opacity: 0.6;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover ,button:hover{
+    width: 125px;
+    box-shadow: 0px 8px 16px 0px rgb(0, 0, 0);
+}
+.caracter
+{
+    text-align: right;
+    color: #949494;
+}
+
+.card {
+    background-color: rgba(196, 196, 196, 0.64);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    width: 360px;
+    margin: 0 auto 100px;
+    border: 6px solid black;
+  }
+
+  .title {
+    padding: 60px 0 80px 0;
+    text-align: center;
+    font-size: 72px;
+    font-weight: bold;
+    color: white; /* Kleur van de tekst binnenin */
+    -webkit-text-stroke: 3px black; /* De dikte en kleur van de rand */
+
+  }

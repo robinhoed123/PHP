@@ -1,0 +1,35 @@
+tekst
+tekst
+tekst
+tekst
+###einde_record###
+Sofie
+sofie@test.foert
+laat eens \"zien\" wat !je nu doet met @al die &speciale §karakters\'
+23-04-2013. 17:48
+###einde_record###
+\"Sofie\" \'Beerens\'
+/Sofie@test/
+\"  #  §  \'  azerty
+23-04-2013. 17:51
+###einde_record###
+Sofie
+sofie@test.foert
+<   test dit eens \\
+23-04-2013. 17:57
+###einde_record###
+Sofie
+test
+jfcrojrzeiopc
+djxiofpaf
+jxiofpafo
+23-04-2013. 18:00
+###einde_record###
+Sofie
+
+cjioqjper
+
+\"
+\'
+02-05-2013. 12:10
+###einde_record###

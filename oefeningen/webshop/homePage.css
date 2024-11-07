@@ -1,0 +1,86 @@
+/* Algemene wrapper */
+.wrapper {
+  margin: 0 auto;
+  min-width: 1200px;
+  max-width: 1800px;
+  padding: 0 10px;
+}
+
+/* Grid voor items */
+.item-lijst {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}
+
+/* Stijl voor individuele items */
+.item {
+  width: 300px;
+  height: 300px;
+  background-color: rgba(196, 196, 196, 0.64);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  box-shadow: 15px 15px 30px;
+  margin: 50px;
+}
+
+/* Stijl voor afbeeldingen binnen items */
+img {
+  width: 300px;
+  height: 150px;
+  border-radius: 20px 20px 0 0;
+  opacity: 90%;
+}
+
+/* Stijl voor paragrafen binnen items */
+p {
+  font-family: sans-serif;
+  margin: 7px;
+}
+
+/* Stijl voor aankoop-informatie (inline) */
+.aankoop {
+  display: inline;
+}
+
+/* Stijl voor selectors */
+.selector {
+  font-weight: bolder;
+}
+
+/* Stijl voor formulieren */
+form {
+  font-family: sans-serif;
+  font-weight: bolder;
+  margin: 10px;
+}
+
+/* Stijl voor het invoerveld (number input) */
+input[type="number"] {
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 36px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Stijl voor knoppen */
+button {
+  padding: 5px 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #00aaff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect voor knoppen */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Stijl voor de footer */
+footer {
+  text-align: center;
+}

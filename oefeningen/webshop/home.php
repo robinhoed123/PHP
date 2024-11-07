@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Robin Herickx</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="video-achtergrond.css">
+    <link rel="stylesheet" href="menubalk.css">
+    <link rel="stylesheet" href="homePage.css">
+</head>
+
+<body>
+    <!-- Video achtergrond -->
+    <video autoplay muted loop class="Video">
+        <source src="Aquarium.mp4" type="video/mp4">
+        Je browser ondersteunt geen HTML5 video.
+    </video>
+
+    <!-- Wrapper voor inhoud en menu -->
+    <div class="wrapper">
+        <div class="menu">
+            <ul class="menu-bar">
+            <?php include 'menubalk.php'; ?>
+            </ul>
+        </div>
+
+    <!-- Hoofdinhoud -->
+    <div class="content">
+        <ul class="item-lijst">
+                <?php
+                // Database connection
+                $link = mysqli_connect("localhost", "root", "", "webshop");
+
+                // Check connection
+                if (!$link) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+
+                // Query to fetch product data
+                $query = "SELECT naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
+                $result = mysqli_query($link, $query);
+
+                // Check if query was successful
+                if ($result) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo '<li><div class="item">';
+                        echo '<img src="' . htmlspecialchars($row['foto']) . '" alt="foto van vis">';
+                        echo '<p><span class="selector">Naam: </span>' . htmlspecialchars($row['naam']) . ' <span class="selector">Gewicht: </span>' . htmlspecialchars($row['gewicht']) . ' gram</p>';
+                        echo '<p><span class="selector">Beschrijving: </span>' . htmlspecialchars($row['beschrijving']) . '</p>';
+                        echo '<div class="aankoop">';
+                        echo '<p><span class="selector">Prijs: </span>' . htmlspecialchars($row['prijs']) . ' €</p>';
+                        echo '<form>';
+                        echo '<label for="aantal">Aantal:</label>';
+                        echo '<input type="number" id="aantal" name="aantal" min="1" max="' . htmlspecialchars($row['voorraad']) . '" required>';
+                        echo '<button type="submit">Toevoegen</button>';
+                        echo '</form>';
+                        echo '</div>';
+                        echo '</div></li>';
+                    }
+                } else {
+                    echo "Error: " . mysqli_error($link);
+                }
+
+                // Close connection
+                mysqli_close($link);
+                ?>
+        </ul>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyright © Thomas More Mechelen-Antwerpen vzw - Campus De Nayer - Professionele bachelor elektronica-ict – 2025</p>
+    </footer>
+</body>
+
+</html>

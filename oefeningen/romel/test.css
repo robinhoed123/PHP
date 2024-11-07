@@ -1,0 +1,12 @@
+.test {
+    background-color: rgb(16, 182, 237);
+    border: 3px solid green;
+    border-radius: 10px;
+    color: white;
+    font-size: 42px;
+    font-weight: bold;
+    padding: 10px;
+    width: 20%;
+    margin-left: 40%;
+    text-align: center; /* Voeg deze regel toe */
+}
