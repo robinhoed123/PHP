@@ -11,6 +11,7 @@ if ($conn->connect_error) {
 }
 
 function bestaatGebruiker($gebruiker, $conn) {
+  $hash = "";
   $stmt = $conn->prepare("SELECT hash FROM persoon WHERE email = ? AND verwijderd = 0");
   $stmt->bind_param("s", $gebruiker);
   $stmt->execute();

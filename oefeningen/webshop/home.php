@@ -31,17 +31,11 @@
                 <?php
                 // Database connection
                 $link = mysqli_connect("localhost", "root", "", "webshop");
-
-                // Check connection
                 if (!$link) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
-
-                // Query to fetch product data
-                $query = "SELECT naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
+                $query = "SELECT product_id,naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
                 $result = mysqli_query($link, $query);
-
-                // Check if query was successful
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<li><div class="item">';
@@ -54,6 +48,9 @@
                         echo '<label for="aantal">Aantal:</label>';
                         echo '<input type="number" id="aantal" name="aantal" min="1" max="' . htmlspecialchars($row['voorraad']) . '" required>';
                         echo '<button type="submit">Toevoegen</button>';
+                        if ($_SESSION['admin'] == 1 && isset($_GET['id'])) {
+                            echo '<button type="button" onclick="location.href=\'Editproduckt.php?id=' . htmlspecialchars($row['product_id']) . '\'">Wijzig</button>';
+                        }
                         echo '</form>';
                         echo '</div>';
                         echo '</div></li>';
