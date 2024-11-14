@@ -121,6 +121,10 @@
         $stmt = $conn->prepare("INSERT INTO product (naam, beschrijving,gewicht,vissoort,prijs,voorraad,foto) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssisids", $productNaam, $productBeschrijving, $productGewicht, $productVissoort, $productHoeveelheid, $productPrijs,$afbeeldingspad);
         $result = $stmt->execute();
+        $conn->execute_query(
+            "INSERT INTO product (naam, beschrijving,gewicht,vissoort,prijs,voorraad,foto) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            [$productNaam, $productBeschrijving, $productGewicht, $productVissoort, $productHoeveelheid, $productPrijs,$afbeeldingspad]
+        );
         // Execute the statement
         if ($result) {
         header("Location: productAdd.php");
