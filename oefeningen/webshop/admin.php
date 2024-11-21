@@ -50,6 +50,9 @@
                     <li>
                         <button onclick="location.href='productAdd.php'">Product toevoegen</button>
                     </li>
+                    <li>
+                        <button onclick="location.href='home.php?id=1'">Product Aanpassen</button>
+                    </li>
                 </ul>
             </div>
         </div>

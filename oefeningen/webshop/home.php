@@ -29,6 +29,12 @@
     <div class="content">
         <ul class="item-lijst">
                 <?php
+                //na kijken of de gebruiker al is ingelogd
+                $ingelogd=FALSE;
+                if(session_status()===PHP_SESSION_ACTIVE){
+                    if(isset($_SESSION['id']))
+                    $ingelogd=TRUE;
+                } 
                 // Database connection
                 $link = mysqli_connect("localhost", "root", "", "webshop");
                 if (!$link) {
@@ -45,12 +51,17 @@
                         echo '<div class="aankoop">';
                         echo '<p><span class="selector">Prijs: </span>' . htmlspecialchars($row['prijs']) . ' €</p>';
                         echo '<form>';
-                        echo '<label for="aantal">Aantal:</label>';
-                        echo '<input type="number" id="aantal" name="aantal" min="1" max="' . htmlspecialchars($row['voorraad']) . '" required>';
-                        echo '<button type="submit">Toevoegen</button>';
+                        if($ingelogd){
                         if ($_SESSION['admin'] == 1 && isset($_GET['id'])) {
                             echo '<button type="button" onclick="location.href=\'Editproduckt.php?id=' . htmlspecialchars($row['product_id']) . '\'">Wijzig</button>';
                         }
+                        else
+                        {
+                            echo '<label for="aantal">Aantal:</label>';
+                            echo '<input type="number" id="aantal" name="aantal" min="1" max="' . htmlspecialchars($row['voorraad']) . '" required>';
+                            echo '<button type="submit">Toevoegen</button>';
+
+                        }}
                         echo '</form>';
                         echo '</div>';
                         echo '</div></li>';

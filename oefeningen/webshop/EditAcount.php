@@ -8,7 +8,8 @@ if (isset($_COOKIE['PHPSESSID']) ) {
     if ( isset($_GET['id']) && $_SESSION['admin'] = 1) {
         $id = $_GET['id'];
     }
-} else {
+} 
+else {
     $id = $_SESSION['id'];
 }
 

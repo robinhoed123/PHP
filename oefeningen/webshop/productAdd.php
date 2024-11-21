@@ -76,9 +76,8 @@
 </html>
 
 <?php
-        if (isset($_COOKIE['PHPSESSID'])) 
+        if (session_status()===PHP_SESSION_ACTIVE) 
         {
-            session_start();
             if (!(isset($_SESSION['id']) && $_SESSION['admin'] == 1))
             {
                 header("Location: niceTry.php");

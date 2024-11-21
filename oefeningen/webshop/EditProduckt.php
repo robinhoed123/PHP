@@ -26,39 +26,78 @@
             <?php include 'menubalk.php'; ?>
             </ul>
         </div>
-
+    
     <!-- Hoofdinhoud -->
+    <?php
+        if (session_status()===PHP_SESSION_ACTIVE) 
+        {
+            if (!(isset($_SESSION['id']) && $_SESSION['admin'] == 1))
+            {
+                header("Location: niceTry.php");
+                exit();
+            }
+        }
+        else 
+        {
+            header("Location: niceTry.php");
+            exit();
+        }
+        $id = $_GET['id'];
+        $servername = "localhost";
+        $username = "Robin";
+        $password = "root";
+        $dbname = "webshop";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        $sql = "SELECT naam, beschrijving,gewicht,vissoort,prijs,voorraad,foto FROM product WHERE product_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
+        ?>
 
             <div class="add-product">
-                    <h2>add Product</h2>
+                    <h2>edit Product</h2>
                     <form id="bewerkProductFormulier" action="productAdd.php" method="post" enctype="multipart/form-data">
                         <p>
-                            <label for="productAfbeelding">Productafbeelding (PNG):</label>
+                            <label for="productAfbeelding">Productafbeelding Aanpassen (PNG):</label>
                             <input type="file" id="productAfbeelding" name="productAfbeelding" accept="image/png" required>
                         </p>
                         <p>
                             <label for="productNaam">Productnaam:</label>
-                            <input type="text" id="productNaam" name="productNaam" required>
+                            <input type="text" id="productNaam" name="productNaam" 
+                            value="<?php echo htmlspecialchars($data['naam'])?>"
+                            required>
                         </p>
                         <p>
                             <label for="productBeschrijving">Productbeschrijving:</label>
-                            <textarea id="productBeschrijving" name="productBeschrijving" required></textarea>
+                            <textarea id="productBeschrijving" name="productBeschrijving" 
+                            value="<?php echo htmlspecialchars($data['beschrijving'])?>"
+                            required></textarea>
                         </p>
                         <p>
                             <label for="productvissoort">vissoort:</label>
-                            <input type="text" id="productvissoort" name="productvissoort" required>
+                            <input type="text" id="productvissoort" name="productvissoort" 
+                            value="<?php echo htmlspecialchars($data['gewicht'])?>"
+                            required>
                         </p>
                         <p>
                             <label for="productgewicht">productgewicht:</label>
-                            <input type="number" id="productgewicht" name="productgewicht" required>
+                            <input type="number" id="productgewicht" name="productgewicht" 
+                            value="<?php echo htmlspecialchars($data['vissoort'])?>"
+                            required>
                         </p>
                         <p>
                             <label for="productPrijs">Productprijs (€):</label>
-                            <input type="number" id="productPrijs" name="productPrijs" step="0.01" required>
+                            <input type="number" id="productPrijs" name="productPrijs" step="0.01"
+                            value="<?php echo htmlspecialchars($data['prijs'])?>"
+                            required>
                         </p>
                         <p>
                             <label for="productHoeveelheid">Beschikbare hoeveelheid:</label>
-                            <input type="number" id="productHoeveelheid" name="productHoeveelheid" min="1" max="69" required>
+                            <input type="number" id="productHoeveelheid" name="productHoeveelheid" min="1" max="69" 
+                            value="<?php echo htmlspecialchars($data['voorraad'])?>"
+                            required>
                         </p>
                         <div class="knop">
                             <input type="submit" value="Opslaan">
@@ -76,26 +115,6 @@
 </html>
 
 <?php
-        if (isset($_COOKIE['PHPSESSID'])) 
-        {
-            session_start();
-            if (!(isset($_SESSION['id']) && $_SESSION['admin'] == 1))
-            {
-                header("Location: niceTry.php");
-                exit();
-            }
-        }
-        else 
-        {
-            header("Location: niceTry.php");
-            exit();
-        }
-
-        $servername = "localhost";
-        $username = "Robin";
-        $password = "root";
-        $dbname = "webshop";
-        $conn = new mysqli($servername, $username, $password, $dbname);
         // Check if all required POST fields are set
         if (!isset($_FILES['productAfbeelding'], $_POST['productNaam'], $_POST['productBeschrijving'], $_POST['productgewicht'], $_POST['productvissoort'], $_POST['productHoeveelheid'], $_POST['productPrijs'])) {
             die("All fields are required.");
