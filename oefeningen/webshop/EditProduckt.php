@@ -48,7 +48,7 @@
         $password = "root";
         $dbname = "webshop";
         $conn = new mysqli($servername, $username, $password, $dbname);
-        $sql = "SELECT naam, beschrijving,gewicht,vissoort,prijs,voorraad,foto FROM product WHERE product_id = ?";
+        $sql = "SELECT naam,beschrijving,gewicht,vissoort,prijs,voorraad,foto FROM product WHERE product_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -58,10 +58,10 @@
 
             <div class="add-product">
                     <h2>edit Product</h2>
-                    <form id="bewerkProductFormulier" action="productAdd.php" method="post" enctype="multipart/form-data">
+                    <form id="bewerkProductFormulier" action="EditProduckt.php?id=<?php echo htmlspecialchars($id)?>" method="post" enctype="multipart/form-data">
                         <p>
                             <label for="productAfbeelding">Productafbeelding Aanpassen (PNG):</label>
-                            <input type="file" id="productAfbeelding" name="productAfbeelding" accept="image/png" required>
+                            <input type="file" id="productAfbeelding" name="productAfbeelding"  accept="image/png">
                         </p>
                         <p>
                             <label for="productNaam">Productnaam:</label>
@@ -71,20 +71,18 @@
                         </p>
                         <p>
                             <label for="productBeschrijving">Productbeschrijving:</label>
-                            <textarea id="productBeschrijving" name="productBeschrijving" 
-                            value="<?php echo htmlspecialchars($data['beschrijving'])?>"
-                            required></textarea>
+                            <textarea id="productBeschrijving" name="productBeschrijving" required><?php echo htmlspecialchars($data['beschrijving'])?></textarea>
                         </p>
                         <p>
                             <label for="productvissoort">vissoort:</label>
                             <input type="text" id="productvissoort" name="productvissoort" 
-                            value="<?php echo htmlspecialchars($data['gewicht'])?>"
+                            value="<?php echo htmlspecialchars($data['vissoort'])?>"
                             required>
                         </p>
                         <p>
                             <label for="productgewicht">productgewicht:</label>
                             <input type="number" id="productgewicht" name="productgewicht" 
-                            value="<?php echo htmlspecialchars($data['vissoort'])?>"
+                            value="<?php echo htmlspecialchars($data['gewicht'])?>"
                             required>
                         </p>
                         <p>
@@ -116,19 +114,23 @@
 
 <?php
         // Check if all required POST fields are set
-        if (!isset($_FILES['productAfbeelding'], $_POST['productNaam'], $_POST['productBeschrijving'], $_POST['productgewicht'], $_POST['productvissoort'], $_POST['productHoeveelheid'], $_POST['productPrijs'])) {
+        if (!isset($_POST['productNaam'], $_POST['productBeschrijving'], $_POST['productgewicht'], $_POST['productvissoort'], $_POST['productHoeveelheid'], $_POST['productPrijs'])) {
             die("All fields are required.");
         }
 
         // Retrieve POST data
-        $productAfbeeldingnaam = $_FILES['productAfbeelding']['name'];
         $productNaam = htmlspecialchars($_POST['productNaam']);
         $productBeschrijving = htmlspecialchars($_POST['productBeschrijving']);
         $productGewicht = htmlspecialchars($_POST['productgewicht']);
         $productVissoort = htmlspecialchars($_POST['productvissoort']);
         $productHoeveelheid = htmlspecialchars($_POST['productHoeveelheid']);
         $productPrijs = htmlspecialchars($_POST['productPrijs']);
-        $afbeeldingspad = "afbeeldingen/" . $productAfbeeldingnaam;
+        if (isset($_FILES['productAfbeelding']) && $_FILES['productAfbeelding']['error'] == UPLOAD_ERR_OK) {
+            $productAfbeeldingnaam = $_FILES['productAfbeelding']['name'];
+            $afbeeldingspad = "afbeeldingen/" . $productAfbeeldingnaam;
+        } else {
+            $afbeeldingspad = $data['foto'];
+        }
         move_uploaded_file($_FILES['productAfbeelding']['tmp_name'], $afbeeldingspad);
 
         // Check connection
@@ -138,12 +140,12 @@
 
         // Prepare and bind
         $conn->execute_query(
-            "INSERT INTO product (naam, beschrijving,gewicht,vissoort,prijs,voorraad,foto) VALUES (?, ?, ?, ?, ?, ?, ?)",
-            [$productNaam, $productBeschrijving, $productGewicht, $productVissoort, $productHoeveelheid, $productPrijs,$afbeeldingspad]
+            "UPDATE product SET naam=?, beschrijving=?, gewicht=?, vissoort=?, prijs=?, voorraad=?, foto=? WHERE product_id=?",
+            [$productNaam, $productBeschrijving, $productGewicht, $productVissoort, $productPrijs, $productHoeveelheid, $afbeeldingspad, $id]
         );
         // Execute the statement
         if ($result) {
-        header("Location: productAdd.php");
+        header("Location: home.php?id=1");
         } else {
             echo "Error: " . $stmt->error;
         }
