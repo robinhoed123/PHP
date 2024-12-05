@@ -42,6 +42,9 @@
                 }
                 $query = "SELECT product_id,naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
                 $result = mysqli_query($link, $query);
+
+                
+
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<li><div class="item">';
@@ -50,7 +53,7 @@
                         echo '<p><span class="selector">Beschrijving: </span>' . htmlspecialchars($row['beschrijving']) . '</p>';
                         echo '<div class="aankoop">';
                         echo '<p><span class="selector">Prijs: </span>' . htmlspecialchars($row['prijs']) . ' €</p>';
-                        echo '<form>';
+                        echo '<form action="home.php" method="post">';
                         if($ingelogd){
                         if ($_SESSION['admin'] == 1 && isset($_GET['id'])) {
                             echo '<button type="button" onclick="location.href=\'Editproduckt.php?id=' . htmlspecialchars($row['product_id']) . '\'">Wijzig</button>';
@@ -59,16 +62,29 @@
                         {
                             echo '<label for="aantal">Aantal:</label>';
                             echo '<input type="number" id="aantal" name="aantal" min="1" max="' . htmlspecialchars($row['voorraad']) . '" required>';
+                            echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($row['product_id']) . '">';
                             echo '<button type="submit">Toevoegen</button>';
-
                         }}
                         echo '</form>';
                         echo '</div>';
                         echo '</div></li>';
                     }
                 } else {
-                    echo "Error: " . mysqli_error($link);
+                    echo
+                     "Error: " . mysqli_error($link);
                 }
+                if(!isset($_SESSION["aantal"])){
+                    $_SESSION['aantal'] = array();
+                }
+                if(!isset($_SESSION["vis"])){
+                    $_SESSION['vis'] = array();
+                }
+                if(isset($_POST["aantal"]) && isset($_POST["product_id"])){
+                    $_SESSION['test'][] = $_POST["aantal"];
+                    $_SESSION['vis'][] = $_POST["product_id"];
+                }
+
+
 
                 // Close connection
                 mysqli_close($link);

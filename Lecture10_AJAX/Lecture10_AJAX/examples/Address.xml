@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addresses>
+  <person mailing="yes">
+    <firstname>John</firstname>
+    <name>Smith</name>
+    <streetNo>Stationstraat 1</streetNo>
+    <postalCode>2000</postalCode>
+    <city>Antwerp</city>
+    <phone>03 1234567</phone>
+  </person>
+  <person mailing="no">
+    <firstname>James</firstname>
+    <name>Cook</name>
+    <streetNo>Markt 2</streetNo>
+    <postalCode>1000</postalCode>
+    <city>Brussels</city>
+    <phone>02 1234567</phone>
+  </person>
+  <person mailing="no">
+    <firstname>Mary</firstname>
+    <name>O'Neil</name>
+    <streetNo>Graslei 4</streetNo>
+    <postalCode>9000</postalCode>
+    <city>Ghent</city>
+    <phone>09 1234567</phone>
+  </person>
+</addresses>

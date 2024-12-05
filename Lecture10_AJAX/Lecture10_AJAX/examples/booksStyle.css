@@ -1,0 +1,32 @@
+span{
+  color:green
+}
+
+div{
+  width:500px
+}
+
+.book{
+  font-family:verdana;
+  color:brown;
+  margin-top:20px;
+  margin-left:20px;
+  border:solid;
+  border-width:1px 1px 2px 2px;
+  padding-left:10px
+}
+
+h3{
+  background-color:#FFFFCC;
+  color:red
+}
+
+p{
+  color:purple;
+  font-size:12pt
+}
+
+img {
+  width: 250px;
+  margin-left:120px;
+}

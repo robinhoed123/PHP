@@ -58,7 +58,7 @@
 
             <div class="add-product">
                     <h2>edit Product</h2>
-                    <form id="bewerkProductFormulier" action="productAdd.php" method="post" enctype="multipart/form-data">
+                    <form id="bewerkProductFormulier" action="productAdd.php" method="post">
                         <p>
                             <label for="productAfbeelding">Productafbeelding Aanpassen (PNG):</label>
                             <input type="file" id="productAfbeelding" name="productAfbeelding" accept="image/png" required>

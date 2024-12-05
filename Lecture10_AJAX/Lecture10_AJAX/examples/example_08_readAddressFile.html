@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Dynamic content creation</title>
+  <style>
+    table{margin-left:50px;border: 1px solid black;border-collapse:collapse;background-color:#FFCCCC;}
+    td{border: 1px solid black}
+  </style>
+<script>
+   function start() {
+    xhr = new XMLHttpRequest();
+    if (xhr == null) {
+      alert ('Problem creating the XMLHttpRequest object');
+    } else {
+      var url="tblAddress.xml";
+      xhr.onreadystatechange=showAnswer;
+      xhr.open("GET",url,true);
+      xhr.send(null);
+    }
+  }
+  
+  function showAnswer() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      deletePreviousOutput();
+      showNewOutput();
+    }
+  } 
+    
+  function deletePreviousOutput() {
+    var output = document.getElementById("output");
+    while(output.childNodes.length > 0) {
+      output.removeChild(output.childNodes[0]);
+    }
+  }
+  
+  function showNewOutput() {
+    var i;
+    var residence = null;
+	  var results= xhr.responseXML;
+    var name = "";
+    var firstname = "";
+    var postalCode = "";
+    var city = "";
+    var searchName = document.getElementById("searchName").value;
+    var addresses = results.getElementsByTagName("address");
+    for(i = 0; i < addresses.length; i++) {
+        residence = addresses[i];
+        name = residence.getElementsByTagName("name")[0].firstChild.nodeValue;
+        firstname = residence.getElementsByTagName("firstname")[0].firstChild.nodeValue;
+        postalCode = residence.getElementsByTagName("postalCode")[0].firstChild.nodeValue;
+        city = residence.getElementsByTagName("city")[0].firstChild.nodeValue;
+        
+        if(searchName == name.substr(0,searchName.length)) 	//compare with first letters from name
+			    addRow(name,firstname,postalCode,city);
+    }
+  }
+  
+  function addRow(name,firstname,postalCode,city) 
+  {
+    var row = document.createElement("tr");
+    var cell = document.createElement("td");
+    var textNode = document.createTextNode(name);
+    cell.appendChild(textNode);
+    row.appendChild(cell);
+    
+    cell = document.createElement("td");
+    textNode = document.createTextNode(firstname);
+    cell.appendChild(textNode);
+    row.appendChild(cell);
+    
+    cell = document.createElement("td");
+    textNode = document.createTextNode(postalCode);
+    cell.appendChild(textNode);
+    row.appendChild(cell);
+	
+    cell = document.createElement("td");
+    textNode = document.createTextNode(city);
+    cell.appendChild(textNode);
+    row.appendChild(cell);
+    
+    document.getElementById("output").appendChild(row);
+  }
+</script>
+</head>
+<body>
+  <h2>AJAX: search in the XML file 'Address.xml'</h2>
+  <form action="#">
+    <p>Enter name: <input type="text" id="searchName" onkeyup="start()"; /></p>
+  </form>
+  
+  <h3>Results:</h3>
+  
+  <table id="output">
+    
+  </table>
+</body>
+</html>

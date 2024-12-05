@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Read books html</title>
+  <link href="booksStyle.css" rel="stylesheet" />
+<script>
+var xmlHttp;
+
+function start() {
+   xmlHttp=new XMLHttpRequest()
+   
+   if (xmlHttp == null) {
+      alert ("Browser does not support HTTP Request");
+   } else {
+      var url="books.html";
+      url=url+"?sid="+Math.random();
+
+      xmlHttp.onreadystatechange=stateChanged;
+      xmlHttp.open("GET",url,true);
+      xmlHttp.send(null);
+   }
+}
+
+function stateChanged() {
+   if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      document.getElementById("books").innerHTML = xmlHttp.responseText;
+   }
+}   
+
+</script>
+</head>
+
+<body>
+<h2>Ajax text response: books.html</h2>
+<form action="#">
+  <p>
+     <input type="button" 
+            value="Click to see the content of the file 'books.html' below" 
+            onclick="start()" />
+   </p>
+</form>
+
+<div id="books"></div>
+
+</body>
+</html>

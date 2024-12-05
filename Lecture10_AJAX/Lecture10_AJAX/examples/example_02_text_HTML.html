@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Ajax example2</title>
+  <style>
+    div{width:500px; background-color:#CCFFCC;}
+    ul{padding-top:1em;padding-bottom:1em;}
+  </style>
+
+<script>
+
+	function start() {
+	  var xhr=new XMLHttpRequest();
+	  if (xhr==null) {
+		alert ("Browser does not support HTTP Request");
+	  } else {
+		xhr.onreadystatechange=function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				showNames(xhr.responseText);
+			}
+		};
+		xhr.open("GET","names.txt",true);
+		xhr.send(null);
+	  }
+	}
+
+	function showNames(text) {
+	  var arrNames = text.split(';');
+	  var eUl = document.createElement('ul');
+	  for (var i = 0; i < arrNames.length; i++) {	
+		var eLi = document.createElement('li');
+		eLi.appendChild(document.createTextNode(arrNames[i]));
+		eUl.appendChild(eLi);
+	  }
+	  document.getElementById("output").appendChild(eUl);
+	}  
+</script>
+</head>
+
+<body>
+	<h2>An introduction to Ajax</h2>
+	<form action="#">
+	  <p>
+		<input type="button" 
+			   value="Click to view the content of the text file 'names.txt' below" 
+			   onclick="start()" />
+	  </p>
+	</form>
+	<div id="output"></div>
+
+</body>
+</html>

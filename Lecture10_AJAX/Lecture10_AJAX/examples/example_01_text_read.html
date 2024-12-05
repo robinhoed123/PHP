@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Ajax example 1</title>
+  <style>
+    div{width:500px; border:solid; border-width:1px 0px; background-color:#CCFFCC;}
+  </style>
+  <script>
+	function start() {
+	  xhr=new XMLHttpRequest();
+	  if (xhr==null) {
+		alert ('Problem creating the XMLHttpRequest object');
+	  } else {
+		var url="text.txt";
+		xhr.onreadystatechange=showAnswer;
+		xhr.open("GET",url,true);
+		xhr.send(null);
+	  }
+	}
+	
+	function showAnswer() {
+	   if (xhr.readyState==4 && xhr.status==200) {
+		  document.getElementById("textBox").innerHTML=xhr.responseText;
+	   }
+	}   
+  </script>
+</head>
+
+<body>
+<h2>First some content to fill the page</h2>
+<p>Lorem ipsum dolor sit amet, ius etiam alienum voluptua ei. Ea cum purto regione iudicabit. Mei at case delicata quaerendum, illum adolescens vel ut. Homero petentium ut qui, ad eirmod recteque per. Vix ex ridens deleniti honestatis, conceptam assueverit mel ea. Cu dicit epicuri postulant duo, quem vitae euripidis vix no. Ad nam aperiam invenire, te mei meis mandamus.</p>
+
+<p>Harum iusto ius cu. Nam cibo dicunt imperdiet no. Amet noster neglegentur duo ex, dictas delicata concludaturque an vel. Te pri scaevola officiis inphonelegat, ei pri sint nominati delicata.</p>
+
+<p>In simul choro concludaturque vis, mei natum doming temporibus no, everti hendrerit honestatis ut vis. Sed ei malis epicurei mediocrem, est ut solum molestiae similique, in ignota fastidii qui. Per ne dicam nostrud suavitate, noster perpetua oportere vis an. Ea duo dolor salutatus, vis rebum latine insolens ex. Idque pertinacia suscipiantur mei et, sed id soleat molestiae conceptam, in legimus torquatos vituperatoribus ius. Duo tollit nonumy hendrerit in.</p>
+
+<p>Utamur eleifend ex sea, ex mea veri debet assueverit, in utinam timeam accusamus pri. Sea ne eruditi consequat, eu dicunt omnesque est, dictas nostrum ut cum. His rebum dolorem complectitur cu, cum munere scripserit ex. Mei dicant admodum posidonium ex, ne natum tritani voluptatibus ius, eu nulla laoreet cum. Equidem accusamus percipitur an cum, appareat neglegentur sea id, fugit salutandi has ex. Nam an viris graeco. Mei cu deserunt consequat, ex debet dolorum scaevola est.</p>
+
+<p>Eum in saepe nostrud inphonelegebat, at nisl atomorum pri, dicta possim labores his ne. Tempor aliquid ex usu, est ex fugit volumus vituperata. Case senserit vel et, pri mundi dissentiet et, duis oporteat nec cu. Sit enim dolor in, qui in nullam melius scripta, falli equidem ei sea.</p>
+
+<p>Tale erant deleniti mei no. Iudicabit accommodare at duo, eum rebum vulputate incorrupte id. Veri epicurei et ius, vix summo nemore convenire ex. Meis solet quo ea. Impedit recusabo comprehensam in vis, qui ut prima errem, mutat doctus an pri.
+
+<p>Te bonorum vocibus vel. Duis indoctum dissentiunt cum ea. Usu graeco facilis eu, gubergren adversarium eos ea. Ea pri nibh laudem, sea dicit nostrum no. Cum ne sale pericula suscipiantur.</p>
+
+<p>Modus constituto usu et, duo eu nostro consulatu, audiam fabulas inphonelegam sed ea. Id mei congue appetere tacimates, eos ei oblique malorum facilisi. Debet invidunt signiferumque vix ei, pro natum mazim dolores ei, omnes dissentiet persequeris eum an. Hinc magna eu vix. Ad tation iisque apeirian usu, eu quo detracto adipiscing temporibus.</p>
+
+<p>Nec novum everti ut. Eu eius omittam appellantur est. Vivendo albucius cotidieque id pro, ne has nostrum petentium. Volumus recusabo facilisis eu vix, cu dico diam suscipit vim, eos id meis commune. Usu recusabo pertinax cu.</p>
+
+<p>Id eum oportere repudiandae conclusionemque. At sit audiam mentitum, in his cetero fabellas. Esse mundi diceret qui ex, vix an admodum facilisis. Ex laoreet eligendi eam, an malis iuvaret assentior sit. Eu pro alia antiopam gloriatur, porro ullum hendrerit ad vel, vix ex lorem appareat gloriatur. Fierent theophrastus eam at, pro nibh omnesque expetenda ad.</p>
+
+<h2>An introduction to Ajax; example1</h2>
+<form action="#">
+  <p><input type="button" value="Click to see the content of the file 'text.txt' below" onclick="start()" /></p>
+</form>
+<div id="textBox"></div>
+</body>
+</html>
+
