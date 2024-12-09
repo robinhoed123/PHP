@@ -12,7 +12,7 @@ if (isset($_COOKIE['PHPSESSID'])) {
   if (isset($_SESSION['id']))
     {
         echo '<li><a href="home.php">Home</a></li>';
-        echo '<li><a href="winkelwagen.php">Winkelwagen</a></li>';
+        echo '<li><a href="winkelmandje.php">Winkelwagen</a></li>';
         echo '<li><a href="acount.php">acount</a></li>';
         echo '<li><a href="contact.php">Help</a></li>';
         if ($_SESSION['admin']==1) {

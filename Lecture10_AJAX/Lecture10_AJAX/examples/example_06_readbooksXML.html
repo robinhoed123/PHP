@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Ajax: books - XML</title>
+  <link href="booksStyle.css" rel="stylesheet" />
+
+<script>
+
+	function start() {
+	  xhr = new XMLHttpRequest();
+	   
+	  if (xhr==null) {
+		 alert ("Browser does not support HTTP Request");
+	  } else {
+		var url="books.xml";
+		xhr.onreadystatechange=showBooks;
+		xhr.open("GET",url,true);
+		xhr.send(null);
+	  }
+	}
+
+	function showBooks() {
+	  if(xhr.readyState == 4 && xhr.status == 200) {
+		var i;
+		var books = xhr.responseXML.getElementsByTagName('book');
+		for (i = 0; i < books.length; i++) {
+		  var x = document.createElement('div');
+		  x.className = 'book';
+		  var y = document.createElement('h3');
+		  y.appendChild(document.createTextNode(getNodeValue(books[i],'title')));
+		  x.appendChild(y);
+		  var z = document.createElement('p');
+		  z.appendChild(document.createTextNode(getNodeValue(books[i],'writer')));
+		  x.appendChild(z);
+		  var a = document.createElement('img');
+		  a.src = books[i].getElementsByTagName('cover')[0].getAttribute('src');
+		  x.appendChild(a);
+		  document.getElementById('books').appendChild(x);
+		}
+	  }
+	}
+
+	function getNodeValue(obj,tag) {
+	  return obj.getElementsByTagName(tag)[0].firstChild.nodeValue;
+	}
+
+</script>
+</head>
+
+<body>
+<h2>An introduction to Ajax XML: books</h2>
+<form action="#">
+  <p><input type="button" value="Click to see the contents of the file 'books.xml' below" onclick="start()" /></p>
+</form>
+
+<div id="books"></div>
+
+</body>
+</html>

@@ -21,13 +21,13 @@
     <div class="wrapper">
         <div class="menu">
             <ul class="menu-bar">
-            <?php include 'menubalk.php'; ?>
+                <?php include 'menubalk.php'; ?>
             </ul>
         </div>
 
-    <!-- Hoofdinhoud -->
-    <div class="content">
-        <ul class="item-lijst">
+        <!-- Hoofdinhoud -->
+        <div class="content">
+            <ul class="item-lijst">
                 <?php
                 //na kijken of de gebruiker al is ingelogd
                 $ingelogd = FALSE;
@@ -43,9 +43,12 @@
                 }
                 $query = "SELECT product_id, naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
                 $result = mysqli_query($link, $query);
+
+
+
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        ?>
+                ?>
                         <li>
                             <div class="item">
                                 <img src="<?php echo htmlspecialchars($row['foto']); ?>" alt="foto van vis">
@@ -53,33 +56,45 @@
                                 <p><span class="selector">Beschrijving: </span><?php echo htmlspecialchars($row['beschrijving']); ?></p>
                                 <div class="aankoop">
                                     <p><span class="selector">Prijs: </span><?php echo htmlspecialchars($row['prijs']); ?> €</p>
-                                    <form>
+                                    <form action="home.php" method="post">
                                         <?php if ($ingelogd) {
                                             if ($_SESSION['admin'] == 1 && isset($_GET['id'])) { ?>
                                                 <button type="button" onclick="location.href='Editproduckt.php?id=<?php echo htmlspecialchars($row['product_id']); ?>'">Wijzig</button>
                                             <?php } else { ?>
                                                 <label for="aantal">Aantal:</label>
                                                 <input type="number" id="aantal" name="aantal" min="1" max="<?php echo htmlspecialchars($row['voorraad']); ?>" required>
+                                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($row['product_id']); ?>">
                                                 <button type="submit">Toevoegen</button>
-                                            <?php }
+                                        <?php }
                                         } ?>
                                     </form>
                                 </div>
                             </div>
                         </li>
-                        <?php
+                <?php
+
                     }
                 } else {
-                    echo "Error: " . mysqli_error($link);
+                    echo
+                    "Error: " . mysqli_error($link);
                 }
-
+                if (!isset($_SESSION["aantal"])) {
+                    $_SESSION['aantal'] = array();
+                }
+                if (!isset($_SESSION["vis"])) {
+                    $_SESSION['vis'] = array();
+                }
+                if (isset($_POST["aantal"]) && isset($_POST["product_id"])) {
+                    $_SESSION['aantal'][] = $_POST["aantal"];
+                    $_SESSION['vis'][] = $_POST["product_id"];
+                }
                 // Close connection
                 mysqli_close($link);
                 ?>
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
-+ 
+    +
     <!-- Footer -->
     <footer>
         <p>Copyright © Thomas More Mechelen-Antwerpen vzw - Campus De Nayer - Professionele bachelor elektronica-ict – 2025</p>

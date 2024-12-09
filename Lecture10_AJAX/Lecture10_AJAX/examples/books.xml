@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+  <book>
+    <writer>Jon Duckett</writer>
+    <title>HTML &amp; CSS: Design and Build Web Sites</title>
+    <cover src="webdesign.jpg" />
+  </book>
+  <book>
+    <writer>Adam Trachtenberg and David Sklar</writer>
+    <title>PHP Cookbook</title>
+    <cover src="PHP.jpg" />
+  </book>
+  <book>
+    <writer>Anthony T. Holdener</writer>
+    <title>Ajax: The Definitive Guide: Interactive Applications for the Web</title>
+    <cover src="AJAX.jpg" />
+  </book>
+</books>
