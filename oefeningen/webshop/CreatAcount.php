@@ -1,9 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "Robin";
-$password = "root";
-$dbname = "webshop";
-$conn = new mysqli($servername, $username, $password, $dbname);
+include 'dataini.php';
+$conn = new mysqli($host, $user, $password, $database);
 
 // Check connection
 if ($conn->connect_error) {

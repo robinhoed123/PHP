@@ -43,11 +43,9 @@
             exit();
         }
         $id = $_GET['id'];
-        $servername = "localhost";
-        $username = "Robin";
-        $password = "root";
-        $dbname = "webshop";
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        include 'dataini.php';
+
+        $conn = new mysqli($host, $user, $password, $database);
         $sql = "SELECT naam,beschrijving,gewicht,vissoort,prijs,voorraad,foto FROM product WHERE product_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);

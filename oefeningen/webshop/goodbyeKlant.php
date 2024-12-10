@@ -9,12 +9,10 @@ if (isset($_COOKIE['PHPSESSID']) ) {
     exit();
 }
 
-$servername = "localhost";
-$username = "Robin";
-$password = "root";
-$dbname = "webshop";
+include 'dataini.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+$conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

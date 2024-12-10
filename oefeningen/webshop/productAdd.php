@@ -90,11 +90,9 @@
             exit();
         }
 
-        $servername = "localhost";
-        $username = "Robin";
-        $password = "root";
-        $dbname = "webshop";
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        include 'dataini.php';
+
+        $conn = new mysqli($host, $user, $password, $database);
         // Check if all required POST fields are set
         if (!isset($_FILES['productAfbeelding'], $_POST['productNaam'], $_POST['productBeschrijving'], $_POST['productgewicht'], $_POST['productvissoort'], $_POST['productHoeveelheid'], $_POST['productPrijs'])) {
             die("All fields are required.");
