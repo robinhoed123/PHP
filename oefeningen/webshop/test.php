@@ -25,10 +25,8 @@
     <div class="content">
     <?php
   // initialisation
-  $host		= "localhost";
-  $user 	= "Robin";
-  $password	= "root";
-  $database 	= "webshop";
+  include 'dataini.php';
+
 
   // step 1: establishing the connection
   $link = mysqli_connect($host, $user, $password) or die("Error: no connection can be made to $host");

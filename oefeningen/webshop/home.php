@@ -21,13 +21,13 @@
     <div class="wrapper">
         <div class="menu">
             <ul class="menu-bar">
-                <?php include 'menubalk.php'; ?>
+            <?php include 'menubalk.php'; ?>
             </ul>
         </div>
 
-        <!-- Hoofdinhoud -->
-        <div class="content">
-            <ul class="item-lijst">
+    <!-- Hoofdinhoud -->
+    <div class="content">
+        <ul class="item-lijst">
                 <?php
 
                 if (!isset($_SESSION['vis'])) {
@@ -51,21 +51,20 @@
                 }
 
                 //na kijken of de gebruiker al is ingelogd
-                $ingelogd = FALSE;
-                if (session_status() === PHP_SESSION_ACTIVE) {
-                    if (isset($_SESSION['id']))
-                        $ingelogd = TRUE;
-                }
-
+                $ingelogd=FALSE;
+                if(session_status()===PHP_SESSION_ACTIVE){
+                    if(isset($_SESSION['id']))
+                    $ingelogd=TRUE;
+                } 
                 // Database connection
                 $link = mysqli_connect("localhost", "root", "", "webshop");
                 if (!$link) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
-                $query = "SELECT product_id, naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
+                $query = "SELECT product_id,naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
                 $result = mysqli_query($link, $query);
 
-
+                
 
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -104,15 +103,15 @@
                     }
                 } else {
                     echo
-                    "Error: " . mysqli_error($link);
+                     "Error: " . mysqli_error($link);
                 }
                 // Close connection
                 mysqli_close($link);
                 ?>
-            </ul>
-        </div>
+        </ul>
     </div>
-    +
+</div>
+
     <!-- Footer -->
     <footer>
         <p>Copyright © Thomas More Mechelen-Antwerpen vzw - Campus De Nayer - Professionele bachelor elektronica-ict – 2025</p>

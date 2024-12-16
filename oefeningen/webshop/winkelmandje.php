@@ -29,10 +29,7 @@
         <div class="content">
             <?php
             // initialisation
-            $host        = "localhost";
-            $user     = "Robin";
-            $password    = "root";
-            $database     = "webshop";
+            include 'dataini.php';
             $link = mysqli_connect($host, $user, $password) or die("Error: no connection can be made to $host");
             mysqli_select_db($link, $database) or die("Error: the database could not be opened");
 
@@ -60,7 +57,6 @@
             echo ("<h2 class='totaal'>Totaal prijs: " . htmlspecialchars($totaalprijs) . "</h2>");
             mysqli_close($link);
             ?>
-
         </div>
     </div>
 

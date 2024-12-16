@@ -32,12 +32,10 @@
 <h1 class="title">ACOUNT</h1>
 <?php
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "webshop";
+include 'dataini.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+
+$conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
