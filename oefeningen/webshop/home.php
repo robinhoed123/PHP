@@ -24,19 +24,22 @@
             <?php include 'menubalk.php'; ?>
             </ul>
         </div>
+        <!-- Zoekveld -->
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Zoek producten...">
+        </div>
 
     <!-- Hoofdinhoud -->
     <div class="content">
         <ul class="item-lijst">
                 <?php
-
                 if (!isset($_SESSION['vis'])) {
                     $_SESSION['vis'] = array();
                 }
                 if (!isset($_SESSION['aantal'])) {
                     $_SESSION['aantal'] = array();
                 }
-                    if (isset($_POST["aantal"]) && isset($_POST["product_id"])){
+                if (isset($_POST["aantal"]) && isset($_POST["product_id"])){
                     $product_id = $_POST['product_id'];
                     $aantal = $_POST['aantal'];
                     $index = array_search($product_id, $_SESSION['vis']);
@@ -63,8 +66,6 @@
                 }
                 $query = "SELECT product_id,naam, beschrijving, gewicht, vissoort, prijs, voorraad, foto FROM product";
                 $result = mysqli_query($link, $query);
-
-                
 
                 if ($result) {
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -102,8 +103,7 @@
 
                     }
                 } else {
-                    echo
-                     "Error: " . mysqli_error($link);
+                    echo "Error: " . mysqli_error($link);
                 }
                 // Close connection
                 mysqli_close($link);
@@ -111,7 +111,7 @@
         </ul>
     </div>
 </div>
-
+<script src="search.js"></script>
     <!-- Footer -->
     <footer>
         <p>Copyright © Thomas More Mechelen-Antwerpen vzw - Campus De Nayer - Professionele bachelor elektronica-ict – 2025</p>
