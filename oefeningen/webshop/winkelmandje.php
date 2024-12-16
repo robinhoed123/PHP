@@ -53,7 +53,7 @@
             }
             echo ("</table>");
             echo ("<td><form method='post' action='resetItem.php'><input type='hidden' name='index' value='-1'><button type='submit'>Verwijderen</button></form></td>");
-            echo ("<td><form method='post' action='bestel.php'><input type='hidden' name='index' value='$totaalprijs'><button type='submit'>bestel</button></form></td>");
+            echo ("<td><form method='post' action='bestel.php'><input type='hidden' name='totaalprijs' value='$totaalprijs'><button type='submit'>bestel</button></form></td>");
             echo ("<h2 class='totaal'>Totaal prijs: " . htmlspecialchars($totaalprijs) . "</h2>");
             mysqli_close($link);
             ?>
