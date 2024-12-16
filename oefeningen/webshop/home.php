@@ -29,6 +29,27 @@
         <div class="content">
             <ul class="item-lijst">
                 <?php
+
+                if (!isset($_SESSION['vis'])) {
+                    $_SESSION['vis'] = array();
+                }
+                if (!isset($_SESSION['aantal'])) {
+                    $_SESSION['aantal'] = array();
+                }
+                    if (isset($_POST["aantal"]) && isset($_POST["product_id"])){
+                    $product_id = $_POST['product_id'];
+                    $aantal = $_POST['aantal'];
+                    $index = array_search($product_id, $_SESSION['vis']);
+                    if ($index !== false) {
+                        // Update
+                        $_SESSION['aantal'][$index] += $aantal;
+                    } else {
+                        // Add new 
+                        $_SESSION['vis'][] = $product_id;
+                        $_SESSION['aantal'][] = $aantal;
+                    }
+                }
+
                 //na kijken of de gebruiker al is ingelogd
                 $ingelogd = FALSE;
                 if (session_status() === PHP_SESSION_ACTIVE) {
@@ -62,7 +83,14 @@
                                                 <button type="button" onclick="location.href='Editproduckt.php?id=<?php echo htmlspecialchars($row['product_id']); ?>'">Wijzig</button>
                                             <?php } else { ?>
                                                 <label for="aantal">Aantal:</label>
-                                                <input type="number" id="aantal" name="aantal" min="1" max="<?php echo htmlspecialchars($row['voorraad']); ?>" required>
+                                                <input type="number" id="aantal" name="aantal" min="1" max="<?php
+                                                $index = array_search($row['product_id'], $_SESSION['vis']);
+                                                if ($index !== false) {
+                                                    $aantal=$_SESSION['aantal'][$index];
+                                                    echo htmlspecialchars($row['voorraad']-$aantal);
+                                                } else {
+                                                    echo htmlspecialchars($row['voorraad']);
+                                                } ?>" required>
                                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($row['product_id']); ?>">
                                                 <button type="submit">Toevoegen</button>
                                         <?php }
@@ -77,16 +105,6 @@
                 } else {
                     echo
                     "Error: " . mysqli_error($link);
-                }
-                if (!isset($_SESSION["aantal"])) {
-                    $_SESSION['aantal'] = array();
-                }
-                if (!isset($_SESSION["vis"])) {
-                    $_SESSION['vis'] = array();
-                }
-                if (isset($_POST["aantal"]) && isset($_POST["product_id"])) {
-                    $_SESSION['aantal'][] = $_POST["aantal"];
-                    $_SESSION['vis'][] = $_POST["product_id"];
                 }
                 // Close connection
                 mysqli_close($link);

@@ -48,15 +48,17 @@
                 while ($stmt->fetch()) {
                     echo ("<tr><td><img src='" . htmlspecialchars($foto) . "' alt='Product Foto' width='50'></td><td>" . htmlspecialchars($naam) . "</td><td>" . htmlspecialchars($beschrijving) . "</td><td>" 
                     . htmlspecialchars($gewicht) . "</td><td>" . htmlspecialchars($vissoort) ."</td><td>" . htmlspecialchars($prijs) . "</td><td>" . $_SESSION['aantal'][$tel] . "</td><td>" .($prijs*$_SESSION['aantal'][$tel]). "</td></tr>");
+                    echo ("<td><form method='post' action='resetItem.php'><input type='hidden' name='index' value='$tel'><button type='submit'>Verwijderen</button></form></td>");
                 }
                 $totaalprijs+=($prijs*$_SESSION['aantal'][$tel]);
                 $tel++;
                 $stmt->close();
             }
             echo ("</table>");
+            echo ("<td><form method='post' action='resetItem.php'><input type='hidden' name='index' value='-1'><button type='submit'>Verwijderen</button></form></td>");
+            echo ("<td><form method='post' action='bestel.php'><input type='hidden' name='index' value='$totaalprijs'><button type='submit'>bestel</button></form></td>");
             echo ("<h2 class='totaal'>Totaal prijs: " . htmlspecialchars($totaalprijs) . "</h2>");
             mysqli_close($link);
-
             ?>
 
         </div>
